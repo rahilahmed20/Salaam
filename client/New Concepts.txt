@@ -1,0 +1,68 @@
+
+1. react-redux                              --->        centralized storage system for the app
+
+2. @reduxjs/toolkit                         --->        set of tools that make your Redux code cleaner and easy
+
+3. redux-persist                            --->        When app's data changes, this package stores the data
+                                                        persistently, so it's not lost when the user refreshes the page or closes the app.
+
+
+4. react-dropzone                           --->        area in app where users can drag and drop files
+
+5. dotenv                                   --->        variables banengey
+
+6. formik                                   --->        simplifies creating and managing forms in the app
+
+7. yup                                      --->        perform validation on data
+
+8. react-router-dom@6                       --->        enables you to set up navigation within your app.
+
+9. @mui/material                            --->        provides pre-styled components
+
+10. @emotion/react                          --->        used to write CSS styles for your components
+
+11. @emotion/styled                         --->        used to write CSS styles for your components.
+
+12. @mui/icons-material                     --->        provides collection of icons
+
+13. React and ReactDOM                      --->        build user interfaces in React applications.
+
+14. authReducer                             --->        manage authentication state using Redux.
+
+15. configureStore                          --->        creates Redux store with preconfigured settings
+
+16. Provider                                --->        makes Redux store available to rest of the app.
+
+17. storage                                 --->        specifies where the persisted data will be stored
+
+18. PersistGate                             --->        waits until the persisted data is loaded from storage before
+                                                        rendering the App component. This ensures that even if the app is closed and opened again, the user's login status is preserved and they don't need to log in again.
+
+19. persistStore                            --->        store the state data even when the app is closed or
+                                                        refreshed, so you can resume from where you left off.
+
+20. persistReducer                          --->        enables your reducer to work seamlessly with redux-persist
+                                                        for storing and retrieving state data.
+
+
+21. FLUSH                                   --->        clears pending actions in Redux store before it's persisted.
+
+22. REHYDRATE                               --->        when the persisted data is loaded back into the Redux store.
+                                                        It's used to rehydrate your store with the saved state.
+
+23. PAUSE                                   --->        pause the persistence temporarily if needed.
+
+24. PERSIST                                 --->        helps in managing state transition during persistence process.
+
+25. PURGE                                   -->         dispatched when you want to reset/clear the persisted state.
+
+26. REGISTER                                -->          used for internal purposes within redux-persist
+
+27. useMemo hook                            --->        optimize performance by memoizing the result of a computation
+
+28. CssBaseline                             --->        Apply default css of material ui 
+
+29. ThemeProvider                           --->        allows you to apply a theme to your entire React app.
+
+30. createTheme                             --->        lets you create customized theme for Material-UI components
+

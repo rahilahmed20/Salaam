@@ -1,0 +1,28 @@
+
+1. nodemon                      -->         just like live server
+
+2. express                      -->         server
+
+3. body-parser                  -->         makes data send by user understandable to server i.e. json format
+
+4. bcrypt                       -->         hash the password
+
+5. cors                         -->         gives permission to website A to share his data
+
+6. dotenv                       -->         most important data save hote hai
+
+7. gridfs-stream                -->         A way to store large files in MongoDB hence it doesn't slow down
+
+8. multer                       -->         takes care of handling uploaded pictures
+
+9. multer-gridfs-storage        -->         handling file uploads and storage directly to GridFS
+
+10. helmet                      -->         adds essential security features to prevent from threats
+
+11. morgan                      -->         monitor your server's activity and performance.
+
+12. jsonwebtoken                -->         just like id card i.e. one time authentication for user
+
+13. mongoose                    -->         interface between express and MongoDB
+
+14. "type": "module"            -->         we will use import instead of require

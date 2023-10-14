@@ -1,0 +1,29 @@
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 30px;
+  width: 70%;
+  display: flex;
+  gap: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+}
+
+.card-details {
+  width: 100%;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 18px;
+}
