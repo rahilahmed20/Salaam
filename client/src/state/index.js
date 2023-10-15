@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   token: null,
   posts: [],
+  donationPosts: [],
 };
 
 function shuffleArray(array) {
@@ -71,9 +72,33 @@ export const authSlice = createSlice({
         posts: updatedPosts,
       };
     },
+    setDonationPosts: (state, action) => {
+      state.donationPosts = action.payload;
+    },
+    setUpdateDonationPost: (state, action) => {
+      const updatedDonationPosts = state.donationPosts.map((post) => {
+        if (post._id === action.payload.updatedDonationPost._id) {
+          return { ...action.payload.updatedDonationPost, key: post._id };
+        }
+        return { ...post, key: post._id };
+      });
+
+      return {
+        ...state,
+        donationPosts: updatedDonationPosts,
+      };
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
-  authSlice.actions;
+export const {
+  setMode,
+  setLogin,
+  setLogout,
+  setFriends,
+  setPosts,
+  setPost,
+  setDonationPosts,
+  setUpdateDonationPost,
+} = authSlice.actions;
 export default authSlice.reducer;

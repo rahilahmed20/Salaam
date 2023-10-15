@@ -46,7 +46,7 @@ export const paymentVerification = async (req, res) => {
         razorpay_signature,
       });
 
-      res.redirect("http://localhost:3000/donate");
+      res.redirect("http://localhost:3002/donate");
     } else {
       res.status(400).json({
         success: false,

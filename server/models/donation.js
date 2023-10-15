@@ -17,23 +17,10 @@ const donationSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  amountGained: [
-    {
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Please Enter the user ID"],
-      },
-      amount: {
-        type: Number,
-        required: true,
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+  amountGained: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: String,
     default: Date.now,

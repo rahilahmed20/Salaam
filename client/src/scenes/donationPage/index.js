@@ -1,12 +1,14 @@
 import Navbar from "scenes/navbar";
 import Typography from "@mui/material/Typography";
 import DonationCard from "../../components/DonationCard.js";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setDonationPosts } from "state";
 
 const DonationPage = () => {
-  const [posts, setPosts] = useState([]);
   const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  const donationPosts = useSelector((state) => state.donationPosts);
 
   const getDonationPosts = async () => {
     try {
@@ -15,7 +17,7 @@ const DonationPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-      setPosts(data?.donations);
+      dispatch(setDonationPosts(data?.donations));
     } catch (err) {
       console.log(err);
       console.log("Error Occured While Fetching Donation Posts");
@@ -33,8 +35,8 @@ const DonationPage = () => {
         Donation Page
       </Typography>
       <div className="container" id="container">
-        {posts &&
-          posts.map((post) => (
+        {donationPosts &&
+          donationPosts.map((post) => (
             <DonationCard cardDetails={post} key={post?._id} />
           ))}
       </div>
