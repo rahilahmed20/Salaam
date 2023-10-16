@@ -116,7 +116,7 @@ const Donation = ({ cardDetails }) => {
       <div className="card">
         <div className="card-image">
           <img
-            src={cardDetails?.picturePath}
+            src={`http://localhost:3001/assets/${cardDetails?.picturePath}`}
             alt="masjid_Image"
             width={400}
             height={300}

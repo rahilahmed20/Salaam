@@ -16,6 +16,7 @@ import paymentRoutes from "./routes/payment.js";
 import donationRoutes from "./routes/donation.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
+import { createDonationPost } from "./controllers/donation.js";
 import { verifyToken } from "./middleware/auth.js";
 import Razorpay from "razorpay";
 
@@ -59,6 +60,8 @@ export const instance = new Razorpay({
 // Routes with files
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
+app.post("/donation/new", upload.single("picture"), createDonationPost);
+
 app.get("/payment/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })
 );

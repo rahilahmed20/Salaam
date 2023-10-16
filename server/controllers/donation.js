@@ -1,12 +1,29 @@
 import Donation from "../models/Donation.js";
 
-// Create Donation Post   --> Admin
+// Create Donation Post
 export const createDonationPost = async (req, res) => {
   try {
-    const donation = await Donation.create(req.body);
+    const { name, description, price, picture } = req.body;
+
+    if (!name || !description || !price || !picture) {
+      res.status(404).json({
+        success: false,
+        message: "Please fill all the fields",
+      });
+    }
+
+    const newDonationPost = new Donation({
+      name,
+      description,
+      price,
+      picturePath: picture,
+    });
+
+    const savedDonationPost = await newDonationPost.save();
+
     res.status(201).json({
       success: true,
-      donation,
+      savedDonationPost,
       message: "Donation Post Created Successfully",
     });
   } catch (err) {
