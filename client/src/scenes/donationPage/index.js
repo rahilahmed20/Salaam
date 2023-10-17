@@ -1,11 +1,11 @@
 import Navbar from "scenes/navbar";
-import Typography from "@mui/material/Typography";
 import DonationCard from "../../components/DonationCard.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { setDonationPosts } from "state";
 import { Box } from "@mui/material";
 import CreateDonation from "scenes/CreateDonationForm/index.js";
+import TypeWriter from "components/TypeWriter.js";
 
 const DonationPage = () => {
   const token = useSelector((state) => state.token);
@@ -42,9 +42,7 @@ const DonationPage = () => {
   return (
     <>
       <Navbar />
-      <Typography variant="h1" sx={{ textAlign: "center", mt: "30px" }}>
-        Donation Page
-      </Typography>
+      <TypeWriter />
       <Box
         sx={{
           display: "flex",
