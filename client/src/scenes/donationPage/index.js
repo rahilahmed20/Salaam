@@ -12,6 +12,7 @@ const DonationPage = () => {
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
   const donationPosts = useSelector((state) => state.donationPosts);
+  const user = useSelector((state) => state.user);
 
   const [create, setCreate] = useState(false);
   const [activeTab, setActiveTab] = useState("donate");
@@ -48,31 +49,33 @@ const DonationPage = () => {
     <>
       <Navbar />
       <TypeWriter />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          mt: "20px",
-        }}
-      >
-        <button
-          className={`donateBtn tab_Btn ${
-            activeTab === "donate" ? "activeTab" : ""
-          }`}
-          onClick={handleDonate}
+      {user?.role === "Admin" && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            mt: "20px",
+          }}
         >
-          DONATE
-        </button>
-        <button
-          className={`createBtn tab_Btn ${
-            activeTab === "create" ? "activeTab" : ""
-          }`}
-          onClick={handleCreate}
-        >
-          CREATE
-        </button>
-      </Box>
+          <button
+            className={`donateBtn tab_Btn ${
+              activeTab === "donate" ? "activeTab" : ""
+            }`}
+            onClick={handleDonate}
+          >
+            DONATE
+          </button>
+          <button
+            className={`createBtn tab_Btn ${
+              activeTab === "create" ? "activeTab" : ""
+            }`}
+            onClick={handleCreate}
+          >
+            CREATE
+          </button>
+        </Box>
+      )}
       {create ? (
         <CreateDonation setCreate={setCreate} />
       ) : (
