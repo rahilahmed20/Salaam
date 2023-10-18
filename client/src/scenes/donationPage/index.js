@@ -6,6 +6,7 @@ import { setDonationPosts } from "state";
 import { Box } from "@mui/material";
 import CreateDonation from "scenes/CreateDonationForm/index.js";
 import TypeWriter from "components/TypeWriter.js";
+import "./index.css";
 
 const DonationPage = () => {
   const token = useSelector((state) => state.token);
@@ -13,12 +14,16 @@ const DonationPage = () => {
   const donationPosts = useSelector((state) => state.donationPosts);
 
   const [create, setCreate] = useState(false);
+  const [activeTab, setActiveTab] = useState("donate");
 
   const handleCreate = () => {
     setCreate(true);
+    setActiveTab("create"); // Set active tab to "create"
   };
+
   const handleDonate = () => {
     setCreate(false);
+    setActiveTab("donate"); // Set active tab to "donate"
   };
 
   const getDonationPosts = async () => {
@@ -51,8 +56,22 @@ const DonationPage = () => {
           mt: "20px",
         }}
       >
-        <button onClick={handleDonate}>Donate</button>
-        <button onClick={handleCreate}>Create</button>
+        <button
+          className={`donateBtn tab_Btn ${
+            activeTab === "donate" ? "activeTab" : ""
+          }`}
+          onClick={handleDonate}
+        >
+          DONATE
+        </button>
+        <button
+          className={`createBtn tab_Btn ${
+            activeTab === "create" ? "activeTab" : ""
+          }`}
+          onClick={handleCreate}
+        >
+          CREATE
+        </button>
       </Box>
       {create ? (
         <CreateDonation setCreate={setCreate} />

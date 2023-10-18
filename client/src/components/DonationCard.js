@@ -2,8 +2,6 @@ import "./DonationCard.css";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { setUpdateDonationPost } from "state";
 
 const Donation = ({ cardDetails }) => {
@@ -11,11 +9,12 @@ const Donation = ({ cardDetails }) => {
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState("");
   const [gatheredAmount, setGatheredAmount] = useState(0);
 
   const amountHandler = (e) => {
-    setNumber(e.target.value);
+    const inputValue = parseInt(e.target.value);
+    setNumber(inputValue);
   };
 
   const deleteDonationPost = async () => {
@@ -118,29 +117,31 @@ const Donation = ({ cardDetails }) => {
           <img
             src={`http://localhost:3001/assets/${cardDetails?.picturePath}`}
             alt="masjid_Image"
-            width={400}
-            height={300}
+            width={352}
+            height={264}
+            className="donation-image"
           />
         </div>
         <div className="card-details">
           <p className="name">{cardDetails?.name}</p>
           <p className="description">{cardDetails?.description}</p>
-          <Box sx={{ width: "100%" }}>
-            <Typography variant="p" fontSize="18px" color="initial">
-              Required: {cardDetails?.price}
-            </Typography>
-            <br />
-            <Typography variant="p" fontSize="18px" color="initial">
-              Gathered: {cardDetails?.amountGained}
-            </Typography>
-            <br />
-            <Typography variant="p" fontSize="18px" color="initial">
-              Amount:{" "}
-              <input type="number" value={number} onChange={amountHandler} />
-            </Typography>
-            <br />
-            <button onClick={checkout}>Pay Now</button>
-          </Box>
+          <div style={{ width: "100%" }}>
+            <p className="price"> Required: ₹{cardDetails?.price}</p>
+            <p className="amountGained">
+              Gathered: ₹{cardDetails?.amountGained}
+            </p>
+          </div>
+          <p className="amount">
+            Amount:{" "}
+            <input
+              type="text"
+              placeholder="Enter the Amount"
+              className="input-amount"
+              value={number}
+              onChange={amountHandler}
+            />
+          </p>
+          <button className="submitBtn" onClick={checkout}>Donate</button>
         </div>
       </div>
     </div>

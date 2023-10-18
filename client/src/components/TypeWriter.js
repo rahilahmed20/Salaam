@@ -5,14 +5,15 @@ import { useSelector } from "react-redux";
 const TypeWriter = () => {
   const [text] = useTypewriter({
     words: [
-      "The Messenger of Allah (peace be upon him) said, 'Whoever donates to a mosque, whether it is large or small, Allah will build for him a house in Paradise.'",
       "The Messenger of Allah (peace be upon him) said, 'He who builds a mosque for Allah, Allah will build for him a house like it in Paradise.'",
       "Charity extinguishes sins as water extinguishes fire.",
-      "When a person dies, their deeds come to an end except for three: ongoing charity, beneficial knowledge, and a righteous child who will pray for them.",
+      "Save yourself from hellfire by giving even half a date-fruit in charity.",
+      "Giving charity provides shade on the Day of Judgment",
+      "The Prophet (peace be upon him), said: “Give charity without delay, for it stands in the way of calamity.”",
     ],
     loop: {},
     typeSpeed: 120,
-    delaySpeed: 30,
+    delaySpeed: 10,
     deleteSpeed: 40,
   });
 
@@ -27,7 +28,7 @@ const TypeWriter = () => {
         display: "flex",
         justifyContent: "center",
         alignContent: "center",
-        height: "200px",
+        height: "150px",
       }}
     >
       <div style={{ width: "80%" }}>
