@@ -13,6 +13,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import setUser from "state";
 
 const UserWidget = ({ userId, picturePath }) => {
   const { palette } = useTheme();
@@ -34,7 +35,7 @@ const UserWidget = ({ userId, picturePath }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-      dispatch({ user: data });
+      dispatch(setUser({ user: data }));
     } catch (error) {
       console.error("Error while fetching user data:", error);
     }

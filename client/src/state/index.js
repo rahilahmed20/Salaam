@@ -88,6 +88,9 @@ export const authSlice = createSlice({
         donationPosts: updatedDonationPosts,
       };
     },
+    setUser: (state, action) => {
+      state.donationPosts = action.payload;
+    },
   },
 });
 

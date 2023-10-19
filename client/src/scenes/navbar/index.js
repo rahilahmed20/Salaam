@@ -52,7 +52,7 @@ const Navbar = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-      setUsers(data.users);
+      setUsers(data?.users);
     } catch (err) {
       console.log(err);
       console.log("Error Occured While fetching all users from server");
