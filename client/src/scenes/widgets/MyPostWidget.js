@@ -132,14 +132,9 @@ const MyPostWidget = ({ picturePath }) => {
         </FlexBetween>
         {isNonMobileScreens ? (
           <>
-            <FlexBetween gap="0.25rem" onClick={() => setIsVideo(!isImage)}>
+          <FlexBetween gap="0.25rem">
               <GifBoxOutlined sx={{ color: mediumMain }} />
-              <Typography
-                color={mediumMain}
-                sx={{ "&:hover": { cursor: "pointer", color: medium } }}
-              >
-                Clip
-              </Typography>
+              <Typography color={mediumMain}>Clip</Typography>
             </FlexBetween>
 
             <FlexBetween gap="0.25rem">
@@ -178,7 +173,3 @@ const MyPostWidget = ({ picturePath }) => {
 
 export default MyPostWidget;
 
-{/* <FlexBetween gap="0.25rem">
-  <GifBoxOutlined sx={{ color: mediumMain }} />
-  <Typography color={mediumMain}>Clip</Typography>
-</FlexBetween>; */}
