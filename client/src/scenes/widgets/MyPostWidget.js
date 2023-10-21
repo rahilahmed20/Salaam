@@ -37,6 +37,9 @@ const MyPostWidget = ({ picturePath }) => {
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
+  const [isClip, setIsClip] = useState(false);
+  const [clip, setClip] = useState(null);
+
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", _id);
@@ -44,6 +47,10 @@ const MyPostWidget = ({ picturePath }) => {
     if (image) {
       formData.append("picture", image);
       formData.append("picturePath", image.name);
+    }
+    if (clip) {
+      formData.append("picture", clip);
+      formData.append("picturePath", clip.name);
     }
 
     const response = await fetch(`http://localhost:3001/posts`, {
@@ -54,6 +61,7 @@ const MyPostWidget = ({ picturePath }) => {
     const posts = await response.json();
     dispatch(setPosts({ posts }));
     setImage(null);
+    setClip(null);
     setPost("");
   };
 
@@ -117,6 +125,50 @@ const MyPostWidget = ({ picturePath }) => {
           </Dropzone>
         </Box>
       )}
+      {isClip && (
+        <Box
+          border={`1px solid ${medium}`}
+          borderRadius="5px"
+          mt="1rem"
+          p="1rem"
+        >
+          <Dropzone
+            acceptedFiles=".mp4" // Specify the accepted file format for clips
+            multiple={false}
+            onDrop={(acceptedFiles) => setClip(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <FlexBetween>
+                <Box
+                  {...getRootProps()}
+                  border={`2px dashed ${palette.primary.main}`}
+                  p="1rem"
+                  width="100%"
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <input {...getInputProps()} />
+                  {!clip ? (
+                    <p>Add Clip Here</p>
+                  ) : (
+                    <FlexBetween>
+                      <Typography>{clip.name}</Typography>
+                      <EditOutlined />
+                    </FlexBetween>
+                  )}
+                </Box>
+                {clip && (
+                  <IconButton
+                    onClick={() => setClip(null)}
+                    sx={{ width: "15%" }}
+                  >
+                    <DeleteOutlined />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            )}
+          </Dropzone>
+        </Box>
+      )}
 
       <Divider sx={{ margin: "1.25rem 0" }} />
 
@@ -132,9 +184,14 @@ const MyPostWidget = ({ picturePath }) => {
         </FlexBetween>
         {isNonMobileScreens ? (
           <>
-          <FlexBetween gap="0.25rem">
+            <FlexBetween gap="0.25rem" onClick={() => setIsClip(!isClip)}>
               <GifBoxOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Clip</Typography>
+              <Typography
+                color={mediumMain}
+                sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+              >
+                Clip
+              </Typography>
             </FlexBetween>
 
             <FlexBetween gap="0.25rem">
@@ -153,7 +210,7 @@ const MyPostWidget = ({ picturePath }) => {
           </FlexBetween>
         )}
         <Button
-          disabled={!post && !image}
+          disabled={!post && !image && !clip} // Disable if no post content, no image, and no clip
           onClick={handlePost}
           sx={{
             color: "#fff",
@@ -164,6 +221,7 @@ const MyPostWidget = ({ picturePath }) => {
             },
           }}
         >
+          {console.log("clip", clip)}
           POST
         </Button>
       </FlexBetween>
@@ -172,4 +230,3 @@ const MyPostWidget = ({ picturePath }) => {
 };
 
 export default MyPostWidget;
-

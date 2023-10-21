@@ -30,6 +30,9 @@ const PostWidget = ({
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
+  const isImage = /\.(jpg|jpeg|png)$/.test(picturePath);
+  const isVideo = /\.mp4$/.test(picturePath);
+
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
@@ -59,13 +62,31 @@ const PostWidget = ({
         {description}
       </Typography>
       {picturePath && (
-        <img
-          width="100%"
-          height="auto"
-          alt="post"
-          style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:3001/assets/${picturePath}`}
-        />
+        <div>
+          {isImage && (
+            <img
+              width="100%"
+              height="auto"
+              alt="post"
+              style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+              src={`http://localhost:3001/assets/${picturePath}`}
+            />
+          )}
+          {isVideo && (
+            <video
+              width="100%"
+              height="auto"
+              controls
+              style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+            >
+              <source
+                src={`http://localhost:3001/assets/${picturePath}`}
+                type="video/mp4"
+              />
+              {console.log("Picture Path - ", picturePath)}
+            </video>
+          )}
+        </div>
       )}
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
