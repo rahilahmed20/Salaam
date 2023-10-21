@@ -32,6 +32,7 @@ const PostWidget = ({
 
   const isImage = /\.(jpg|jpeg|png)$/.test(picturePath);
   const isVideo = /\.mp4$/.test(picturePath);
+  const isAudio = /\.mp3$/.test(picturePath);
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -85,6 +86,21 @@ const PostWidget = ({
               />
               {console.log("Picture Path - ", picturePath)}
             </video>
+          )}
+          {isAudio && (
+            <audio
+              controls
+              style={{
+                width: "100%",
+                borderRadius: "0.75rem",
+                marginTop: "0.75rem",
+              }}
+            >
+              <source
+                src={`http://localhost:3001/assets/${picturePath}`}
+                type="audio/mpeg" // Adjust the MIME type as needed
+              />
+            </audio>
           )}
         </div>
       )}

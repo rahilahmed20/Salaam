@@ -40,6 +40,9 @@ const MyPostWidget = ({ picturePath }) => {
   const [isClip, setIsClip] = useState(false);
   const [clip, setClip] = useState(null);
 
+  const [isAudio, setIsAudio] = useState(false);
+  const [audio, setAudio] = useState(null);
+
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", _id);
@@ -52,6 +55,10 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picture", clip);
       formData.append("picturePath", clip.name);
     }
+    if (audio) {
+      formData.append("picture", audio);
+      formData.append("picturePath", audio.name);
+    }
 
     const response = await fetch(`http://localhost:3001/posts`, {
       method: "POST",
@@ -62,6 +69,7 @@ const MyPostWidget = ({ picturePath }) => {
     dispatch(setPosts({ posts }));
     setImage(null);
     setClip(null);
+    setAudio(null);
     setPost("");
   };
 
@@ -169,6 +177,50 @@ const MyPostWidget = ({ picturePath }) => {
           </Dropzone>
         </Box>
       )}
+      {isAudio && (
+        <Box
+          border={`1px solid ${medium}`}
+          borderRadius="5px"
+          mt="1rem"
+          p="1rem"
+        >
+          <Dropzone
+            acceptedFiles=".mp3" // Specify the accepted file format for audio
+            multiple={false}
+            onDrop={(acceptedFiles) => setAudio(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <FlexBetween>
+                <Box
+                  {...getRootProps()}
+                  border={`2px dashed ${palette.primary.main}`}
+                  p="1rem"
+                  width="100%"
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <input {...getInputProps()} />
+                  {!audio ? (
+                    <p>Add Audio Here</p>
+                  ) : (
+                    <FlexBetween>
+                      <Typography>{audio.name}</Typography>
+                      <EditOutlined />
+                    </FlexBetween>
+                  )}
+                </Box>
+                {audio && (
+                  <IconButton
+                    onClick={() => setAudio(null)}
+                    sx={{ width: "15%" }}
+                  >
+                    <DeleteOutlined />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            )}
+          </Dropzone>
+        </Box>
+      )}
 
       <Divider sx={{ margin: "1.25rem 0" }} />
 
@@ -199,9 +251,14 @@ const MyPostWidget = ({ picturePath }) => {
               <Typography color={mediumMain}>Attachment</Typography>
             </FlexBetween>
 
-            <FlexBetween gap="0.25rem">
+            <FlexBetween gap="0.25rem" onClick={() => setIsAudio(!isAudio)}>
               <MicOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Audio</Typography>
+              <Typography
+                color={mediumMain}
+                sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+              >
+                Audio
+              </Typography>
             </FlexBetween>
           </>
         ) : (
@@ -210,7 +267,7 @@ const MyPostWidget = ({ picturePath }) => {
           </FlexBetween>
         )}
         <Button
-          disabled={!post && !image && !clip} // Disable if no post content, no image, and no clip
+          disabled={!post && !image && !clip && !audio}
           onClick={handlePost}
           sx={{
             color: "#fff",
