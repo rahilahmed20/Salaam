@@ -116,9 +116,10 @@ const Navbar = () => {
           <Help sx={{ fontSize: "25px" }} />
           <Link to="/donate">
             <LocalAtmIcon
-              sx={{ fontSize: "28px", mt: "5px", color: { neutralLight } }}
+              sx={{ fontSize: "28px", mt: "6px", color: "#212121" }}
             />
           </Link>
+
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}

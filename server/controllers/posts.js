@@ -106,3 +106,31 @@ export const likePost = async (req, res) => {
     });
   }
 };
+
+// Delete
+export const deletePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    await post.remove();
+
+    res.status(200).json({
+      success: true,
+      message: "Post deleted successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+      message: "Something went wrong while deleting the post",
+    });
+  }
+};

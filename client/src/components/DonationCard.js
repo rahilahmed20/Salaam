@@ -26,8 +26,7 @@ const Donation = ({ cardDetails }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      const data = await response.json();
-      console.log(data);
+      const data = await response.json(); // eslint-disable-line no-unused-vars
     } catch (err) {
       console.log(err);
       console.log("Error Occured While Deleting Donation Post");
