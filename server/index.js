@@ -19,6 +19,7 @@ import { createPost } from "./controllers/posts.js";
 import { createDonationPost } from "./controllers/donation.js";
 import { verifyToken } from "./middleware/auth.js";
 import Razorpay from "razorpay";
+import { v4 as uuidv4 } from "uuid";
 
 // Configurations
 
@@ -39,13 +40,15 @@ app.use(cors());
 // images locally store hongey
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
+let uniqueID = uuidv4();
+
 // File Storage     (Same as documentation)     cb --> callback function
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/assets");
   },
   filename: function (req, file, cb) {
-    cb(null, `${file.originalname}`);
+    cb(null, `${uniqueID} - ${file.originalname}`);
   },
 });
 
@@ -59,8 +62,13 @@ export const instance = new Razorpay({
 
 // Routes with files
 app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
-app.post("/donation/new", upload.single("picture"), createDonationPost);
+app.post("/posts", verifyToken, upload.single("picture"), (req, res) => {
+  createPost(req, res, uniqueID);
+});
+
+app.post("/donation/new", upload.single("picture"), (req, res) => {
+  createDonationPost(req, res, uniqueID);
+});
 
 app.get("/payment/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })

@@ -278,7 +278,6 @@ const MyPostWidget = ({ picturePath }) => {
             },
           }}
         >
-          {console.log("clip", clip)}
           POST
         </Button>
       </FlexBetween>

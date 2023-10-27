@@ -1,9 +1,9 @@
 import Donation from "../models/Donation.js";
 
 // Create Donation Post
-export const createDonationPost = async (req, res) => {
+export const createDonationPost = async (req, res, uniqueID) => {
   try {
-    const { name, description, price, picture } = req.body;
+    let { name, description, price, picture } = req.body;
 
     if (!name || !description || !price || !picture) {
       res.status(404).json({
@@ -11,6 +11,8 @@ export const createDonationPost = async (req, res) => {
         message: "Please fill all the fields",
       });
     }
+
+    picture = `${uniqueID} - ${picture}`;
 
     const newDonationPost = new Donation({
       name,
