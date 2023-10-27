@@ -7,7 +7,7 @@ export const createPost = async (req, res, uniqueID) => {
     let { userId, description, picturePath } = req.body;
 
     picturePath = `${uniqueID} - ${picturePath}`;
-    
+
     const user = await User.findById(userId);
     const newPost = new Post({
       userId,
@@ -113,13 +113,21 @@ export const likePost = async (req, res) => {
 // Delete
 export const deletePost = async (req, res) => {
   try {
-    const { postId } = req.params;
+    const { postId, userId } = req.params;
     const post = await Post.findById(postId);
 
     if (!post) {
       return res.status(404).json({
         success: false,
         message: "Post not found",
+      });
+    }
+
+    // Check if the authenticated user's userId matches the userId of the post
+    if (userId !== post.userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to delete this post",
       });
     }
 

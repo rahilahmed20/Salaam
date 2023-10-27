@@ -42,7 +42,7 @@ const PostWidget = ({
   const handleDeletePost = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/deletePost/${postId}`,
+        `http://localhost:3001/posts/${loggedInUserId}/deletePost/${postId}`,
         {
           method: "DELETE",
           headers: {
