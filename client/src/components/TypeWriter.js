@@ -1,6 +1,7 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { Typography, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
+import "./TypeWriter.css";
 
 const TypeWriter = () => {
   const [text] = useTypewriter({
@@ -12,7 +13,7 @@ const TypeWriter = () => {
       "The Prophet (peace be upon him), said: “Give charity without delay, for it stands in the way of calamity.”",
     ],
     loop: {},
-    typeSpeed: 120,
+    typeSpeed: 10,
     delaySpeed: 10,
     deleteSpeed: 40,
   });
@@ -23,18 +24,11 @@ const TypeWriter = () => {
   const mode = useSelector((state) => state.mode);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignContent: "center",
-        height: "150px",
-      }}
-    >
+    <div className="typewriterArea">
       <div style={{ width: "80%" }}>
         <Typography
           sx={{ m: "20px", textAlign: "center" }}
-          variant="h1"
+          variant="p"
           color={mode === "light" ? dark : light}
         >
           <span>{text}</span>

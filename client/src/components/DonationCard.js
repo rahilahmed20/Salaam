@@ -140,7 +140,11 @@ const Donation = ({ cardDetails }) => {
               onChange={amountHandler}
             />
           </p>
-          <button className="submitBtn" onClick={checkout}>Donate</button>
+          <div className="buttonContainer">
+            <button className="submitBtn" onClick={checkout}>
+              Donate
+            </button>
+          </div>
         </div>
       </div>
     </div>

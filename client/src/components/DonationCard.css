@@ -89,3 +89,18 @@
   transform: scale(1.05);
   font-weight: 500;
 }
+
+@media (max-width: 640px) {
+  .card {
+    flex-direction: column;
+  }
+  .input-amount {
+    width: 70%;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+}
