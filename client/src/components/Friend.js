@@ -34,7 +34,8 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
       }
     );
     const data = await response.json();
-    dispatch(setFriends({ friends: data }));
+    console.log(data?.formattedFriends)
+    dispatch(setFriends({ friends: data.formattedFriends }));
   };
 
   return (

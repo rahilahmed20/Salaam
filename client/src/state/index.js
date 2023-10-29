@@ -34,7 +34,7 @@ export const authSlice = createSlice({
     },
     setFriends: (state, action) => {
       if (state.user) {
-        const friends = action.payload.friends.formattedFriends;
+        const friends = action.payload.friends;
 
         // Check if the user is trying to add themselves as a friend
         if (!friends.includes(state.user.id)) {

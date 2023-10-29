@@ -13,7 +13,7 @@ const TypeWriter = () => {
       "The Prophet (peace be upon him), said: “Give charity without delay, for it stands in the way of calamity.”",
     ],
     loop: {},
-    typeSpeed: 10,
+    typeSpeed: 120,
     delaySpeed: 10,
     deleteSpeed: 40,
   });
